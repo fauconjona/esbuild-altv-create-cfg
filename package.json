@@ -30,6 +30,6 @@
     "esbuild-plugin-copy": "^0.4.0"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "cfg-reader": "^3.0.1"
   }
 }

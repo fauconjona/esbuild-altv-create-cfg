@@ -1,6 +1,6 @@
 import path from "path"
 import fs from "fs"
-import yaml from 'js-yaml';
+import {Config} from 'cfg-reader';
 
 function log(msg) {
     console.log('\x1b[36m%s\x1b[0m', msg)
@@ -50,43 +50,37 @@ export function createCfg(file,
                 }
     
                 let filename = path.basename(build.initialOptions.outfile);
-                let doc = {}
-
-                if (fs.existsSync(file)) {
-                    doc = yaml.load(fs.readFileSync(file, 'utf8'));
-                }
+                let doc = new Config(file);
 
                 if (client) {
                     clientFiles.push(filename)
-                    doc["client-type"] = type;
-                    doc["client-main"] = filename; 
+                    doc.set("client-type", type);
+                    doc.set("client-main", filename); 
                 }
     
                 if (server) {
-                    doc["type"] = type;
-                    doc["main"] = type == 'csharp' ? dll : filename; 
+                    doc.set("type", type);
+                    doc.set("main", type == 'csharp' ? dll : filename); 
                 }
     
                 if (clientFiles.length > 0) {
-                    doc["client-files"] = clientFiles;
+                    doc.set("client-files", clientFiles);
                 }
 
                 if (requiredPermissions.length > 0) {
-                    doc["required-permissions"] = requiredPermissions;
+                    doc.set("required-permissions", requiredPermissions);
                 }
 
                 if (optionalPermissions.length > 0) {
-                    doc["optional-permissions"] = optionalPermissions;
+                    doc.set("optional-permissions", optionalPermissions);
                 }
 
                 if (deps.length > 0) {
-                    doc["deps"] = deps;
+                    doc.set("deps", deps);
                 }
     
-                fs.writeFile(file, yaml.dump(doc, {flowLevel: 1}), (err) => {
-                    if (err) throw err;
-                    log(`${file} created`);
-                })
+                doc.save();
+                log(`${file} created`);
 
                 return true;
             })
