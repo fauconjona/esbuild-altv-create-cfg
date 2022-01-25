@@ -1,0 +1,35 @@
+{
+  "name": "esbuild-altv-create-cfg",
+  "version": "1.0.0",
+  "description": "esbuild plugin to create an altv resource.cfg",
+  "main": "src/index.js",
+  "type": "module",
+  "types": "lib",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test:client": "node --es-module-specifier-resolution=node example/client.config.js",
+    "test:server": "node --es-module-specifier-resolution=node example/server.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fauconjona/esbuild-altv-create-cfg.git"
+  },
+  "keywords": [
+    "esbuild",
+    "altv",
+    "cfg"
+  ],
+  "author": "fauconjona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fauconjona/esbuild-altv-create-cfg/issues"
+  },
+  "homepage": "https://github.com/fauconjona/esbuild-altv-create-cfg#readme",
+  "devDependencies": {
+    "esbuild": "^0.13.2",
+    "esbuild-plugin-copy": "^0.4.0",
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -1,0 +1,4 @@
+node_modules/
+example/myresource/
+
+package-lock.json

@@ -1,14 +1,12 @@
-# esbuild-altv-create-cfg
+import { fileURLToPath } from 'url'
+import path from 'path'
+import { build } from 'esbuild'
+import {createCfg} from '../src/index'
+import {copy} from 'esbuild-plugin-copy';
 
-A esbuild plugin to create a resource.cfg for altv.
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-Useful when you want to generate your resource folder from your soucre
-
-## how to use
-
-`npm i -D esbuild-altv-create-cfg`
-
-```js
 build({
     minify: true,
     watch: false,
@@ -19,6 +17,7 @@ build({
     entryPoints: [path.resolve(__dirname, 'src', 'client.js')],
     outfile: path.resolve(__dirname, 'myresource', 'client.js'),
     plugins: [
+        copy({assets: {from: path.resolve(__dirname, 'src', 'html', '*'), to: path.resolve(__dirname, 'myresource', 'html')}}),
         createCfg(path.resolve(__dirname, 'myresource', 'resource.cfg'), {
             type: 'js',
             client: true, 
@@ -30,4 +29,3 @@ build({
     ],
     external: ['alt-client', 'natives'],
 })
-```
