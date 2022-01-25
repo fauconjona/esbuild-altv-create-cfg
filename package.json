@@ -1,12 +1,11 @@
 {
   "name": "esbuild-altv-create-cfg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "esbuild plugin to create an altv resource.cfg",
   "main": "src/index.js",
   "type": "module",
   "types": "lib",
   "directories": {
-    "example": "example"
   },
   "scripts": {
     "test:client": "node --es-module-specifier-resolution=node example/client.config.js",
